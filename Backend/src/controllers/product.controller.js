@@ -3,6 +3,7 @@ import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
+import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 const createProduct = asyncHandler(async (req, res) => {
 
@@ -11,7 +12,7 @@ const createProduct = asyncHandler(async (req, res) => {
         throw new ApiError(400, "Unauthorized request. Admin only")
     }
 
-    const { name, price, img, des } = req.body
+    const { name, price, des } = req.body
 
     if (!(name || price)) {
         throw new ApiError(400, "Name and Price are required.")
@@ -23,10 +24,19 @@ const createProduct = asyncHandler(async (req, res) => {
         throw new ApiError(409, "Product is already exist with same name.")
     }
 
+    
+    const productImgLocalPath = req.file?.path;
+
+    const productImage = await uploadOnCloudinary(productImgLocalPath)
+
+    if (!productImage) {
+        throw new ApiError(400,"product image is missing")
+    }
+
     const product = await Product.create({
         name: name.toLowerCase(),
         price,
-        img,
+        img: productImage.url || "",
         des
     })
 
