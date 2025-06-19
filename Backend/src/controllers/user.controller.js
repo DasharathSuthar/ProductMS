@@ -20,14 +20,14 @@ const options = {
 }
 
 const registerUser = asyncHandler(async (req, res) => {
-    const { userName, email, fullName, password, role } = req.body
+    const { username, email, fullName, password, role } = req.body
 
-    if ([userName, email, fullName, password, role].some(field => field?.trim() === "")) {
+    if ([username, email, fullName, password, role].some(field => field?.trim() === "")) {
         throw new ApiError(400, "All fields are required.")
     }
 
     const existedUser = await User.findOne({
-        $or: [{ userName }, { email }]
+        $or: [{ username }, { email }]
     })
 
     if (existedUser) {
@@ -35,10 +35,11 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     const user = await User.create({
-        userName: userName.toLowerCase(),
+        username: username.toLowerCase(),
         fullName,
         email,
-        password
+        password,
+        role
     })
 
     const createdUser = await User.findById(user._id).select("-password")
