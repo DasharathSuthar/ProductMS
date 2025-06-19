@@ -30,18 +30,63 @@ const createProduct = asyncHandler(async (req, res) => {
         des
     })
 
-    res.status(200).json(new ApiResponse(200, product, "Product created."))
+    return res.status(200).json(new ApiResponse(200, product, "Product created."))
 })
 
-const getAllProducts = asyncHandler(async(req,res) =>{
+const getAllProducts = asyncHandler(async (req, res) => {
     const products = await Product.find({})
+
     if (!products) {
-        throw new ApiError(400,"something is wrong when facthing Products")
+        throw new ApiError(400, "something is wrong when facthing Products")
     }
 
-    res.status(200).json(new ApiResponse(200,products,"Prodcuts facthed successfully"))
+    return res.status(200).json(new ApiResponse(200, products, "Prodcuts facthed successfully"))
+})
+
+const getProductById = asyncHandler(async (req, res) => {
+
+    const productById = await Product.findById(req.params.id)
+
+    if (!productById) {
+        throw new ApiError(400, "product Id is invalid")
+    }
+
+    return res.status(200).json(new ApiResponse(200, productById, "Prodcuts  facthed successfully"))
+
+})
+
+const updateProductDetails = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id)
+    if (!(user.role === "admin")) {
+        throw new ApiError(400, "Unauthorized request. Admin only")
+    }
+
+    const { name, price, img, des } = req.body
+
+    if (!(name || price)) {
+        throw new ApiError(401, "all fields are required.")
+    }
+
+    const updatedProduct = await Product.findByIdAndUpdate(req.params.id, { $set: { name, price, img, des } }, { new: true })
+
+    return res.status(200).json(new ApiResponse(200, updatedProduct, "Product details Updated successfully."))
+
+})
+
+const deleteProduct = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id)
+    if (!(user.role === "admin")) {
+        throw new ApiError(400, "Unauthorized request. Admin only")
+    }
+
+    await Product.findByIdAndDelete(req.params.id)
+
+    return res.status(200).json(new ApiResponse(200, {}, "Product Deleted successfully."))
 })
 export {
     createProduct,
-    getAllProducts
+    getAllProducts,
+    getProductById,
+    updateProductDetails,
+    deleteProduct
 }
