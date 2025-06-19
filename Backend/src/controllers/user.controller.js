@@ -79,7 +79,44 @@ const loginUser = asyncHandler(async (req, res) => {
         .json(new ApiResponse(200, { user: loggedInUser, accessToken }, "user LoggedIn successfully"))
 })
 
+const logoutUser = asyncHandler(async (req, res) => {
+    await User.findById(req.user._id)
+
+    return res
+        .status(200)
+        .clearCookie("accessToken",options)
+        .json(new ApiResponse(200,{},"User Logged Out"))
+})
+
+const getCurrentUser = asyncHandler(async (req,res)=>{
+     return res.status(200).json(new ApiResponse(200, req.user, "User fatched successfully."))
+})
+
+const changePassword = asyncHandler(async (req,res)=>{
+    const {oldPassword,newPassword} = req.body
+
+    if (!(oldPassword || newPassword)) {
+        throw new ApiError(400,"all filed are required")
+    }
+
+    const user = await User.findById(req.user._id)
+
+    const isPasswordValid = user.isPasswordCorrect(oldPassword)
+
+    if (!isPasswordValid) {
+        throw new ApiError(400,"Old Password is incorrect")
+    }
+
+    user.password =  newPassword
+    await user.save({validateBeforeSave:false})
+
+    res.status(200).json(new ApiResponse(200,{},"Password Changed Successfully"))
+})
+
 export {
     registerUser,
-    loginUser
+    loginUser,
+    logoutUser,
+    getCurrentUser,
+    changePassword
 }
