@@ -1,4 +1,5 @@
 import AdminRoutes from "./routes/adminRoutes/AdminRoutes"
+import ClientRoutes from "./routes/clientRoutes/ClientRoutes"
 
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
   return (
     <>
       <AdminRoutes />
+      <ClientRoutes/>
     </>
   )
 }
