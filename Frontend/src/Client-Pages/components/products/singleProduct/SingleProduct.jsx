@@ -2,7 +2,7 @@ import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { WishListControllerIns } from '../../../../controller/wishListController/wishList.controller.js'
 
-export const SingleProduct = () => {
+ const SingleProduct = () => {
     const location = useLocation()
     const { name, img, description, price, id } = location.state || {}
     const navigate = useNavigate()
@@ -43,7 +43,7 @@ export const SingleProduct = () => {
                             <p><span className='text-xl font-semibold'>Description</span> : {description} </p>
                             <button className='bg-gray-700 text-white text-lg font-semibold p-4 rounded-md w-48'
                                 onClick={addToWishList}
-                            >WishList +</button>
+                            >WishList <i className="fa-solid fa-cart-arrow-down"></i></button>
                         </div>
                     </div>
                 </div>
@@ -51,3 +51,5 @@ export const SingleProduct = () => {
         </>
     )
 }
+
+export default SingleProduct

@@ -11,7 +11,6 @@ const Login = () => {
 
     const navigate = useNavigate();
     const location = useLocation()
-    const { redirectTo, productData } = location.state || {};
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -23,7 +22,7 @@ const Login = () => {
                 navigate("/admin/dashboard")
             }
             else {
-                localStorage.setItem("userLoggedIn", JSON.stringify(res.data.user))
+                localStorage.setItem("userLoggedIn", JSON.stringify({id:res.data.user._id,username:res.data.user.username}))
                 navigate("/")
             }
 

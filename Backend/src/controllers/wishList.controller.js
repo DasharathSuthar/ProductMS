@@ -35,13 +35,14 @@ const addWishItem = asyncHandler(async (req, res) => {
 })
 
 const getWishList = asyncHandler(async (req, res) => {
-    const allWishList = await WishList.find({}).populate("userId").populate("items")
+    const userId = req.user._id;
+    const userWishList  = await WishList.findOne({userId}).populate("userId").populate("items")
 
-    if (!allWishList) {
+    if (!userWishList) {
         throw new ApiError(400, "WishList is Empty.")
     }
 
-    return res.status(200).json(new ApiResponse(200, { List: allWishList }, "List facthed."))
+    return res.status(200).json(new ApiResponse(200, { List: userWishList }, "List facthed."))
 })
 
 const removeWishList = asyncHandler(async (req, res) => {

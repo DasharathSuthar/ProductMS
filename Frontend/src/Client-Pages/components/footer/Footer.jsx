@@ -14,7 +14,7 @@ const Footer = () => {
                   <h1 className=" text-4xl text-white font-semibold tracking-wide">
                     ProductMS
                   </h1>
-                  <hr className='w-48 mt-2'/>
+                  <hr className='w-48 mt-2' />
                 </Link>
                 <div className="footer-add mt-3">
                   <p className="mb-3 text-gray-400">A-402, Apple City, Dhunai Road, Modasa, Gujarat, India.</p>
@@ -29,7 +29,7 @@ const Footer = () => {
                 <ul className='capitalize'>
                   <li className="mb-2"><Link to="/" className="text-gray-400 hover:text-white">Home</Link></li>
                   <li className="mb-2"><Link to="/products" className="text-gray-400 hover:text-white">Products</Link></li>
-                  <li className="mb-2"><Link to="/" className="text-gray-400 hover:text-white">wishList</Link></li>
+                  <li className="mb-2"><Link to="/wishList" className="text-gray-400 hover:text-white">wishList</Link></li>
                   <li className="mb-2"><Link to="/login" className="text-gray-400 hover:text-white">Admin</Link></li>
                 </ul>
               </div>

@@ -12,7 +12,8 @@ import Users from '../Admin-Pages/components/users/Users'
 import Login from '../Admin-Pages/components/loginPage/LoginPage'
 import RequireAdminAuth from '../Admin-Pages/components/adminAuth/AdminAuth'
 import SignUpPage from '../Client-Pages/components/signUp/SignUpPage'
-import { SingleProduct } from '../Client-Pages/components/products/singleProduct/SingleProduct'
+import SingleProduct from '../Client-Pages/components/products/singleProduct/SingleProduct'
+import WishList from '../Client-Pages/components/wishList/WishList'
 
 const Routing = () => {
     return (
@@ -24,6 +25,7 @@ const Routing = () => {
                         <Route path='' element={<Home />} />
                         <Route path='products' element={<Products />} />
                         <Route path='singleProduct' element={<SingleProduct />} />
+                        <Route path='wishList' element={<WishList />} />
                     </Route>
                     {/* client routes */}
                     <Route path='/signup' element={<SignUpPage />} />

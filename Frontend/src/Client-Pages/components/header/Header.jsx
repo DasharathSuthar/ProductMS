@@ -69,7 +69,7 @@ const Header = () => {
                                         isActive ? "border-white border-b " : ""
                                     }
                                 >
-                                    WishList
+                                    WishList <i className="fa-solid fa-cart-shopping"></i>
                                 </NavLink>
                             </li>
                         </ul>
