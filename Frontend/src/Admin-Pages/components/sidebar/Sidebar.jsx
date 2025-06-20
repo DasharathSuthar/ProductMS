@@ -2,7 +2,7 @@
 
 const Sidebar = () => {
     return (
-        <aside className='bg-black w-64 h-screen '>
+        <aside className='bg-black w-64 h-full '>
             <div className="container  ">
                 <a href="/dashboard" className='p-3 flex items-center h-[87px] bg-gray-600'>
                     <h1 className='text-white font-semibold uppercase text-4xl '>ProdcutMS</h1>

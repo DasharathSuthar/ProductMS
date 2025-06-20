@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { verifyJWT } from '../middlewares/auth.middlewear.js'
-import { createProduct, deleteProduct, getAllProducts, getProductById, updateProductDetails } from '../controllers/product.controller.js'
+import { createProduct, deleteProduct, getAllProducts, getProductById, updateProductDetails, updateProductImage } from '../controllers/product.controller.js'
 import { upload } from '../middlewares/multer.middlewear.js'
 
 const router = Router()
@@ -14,5 +14,6 @@ router.route("/:id")
     .put(verifyJWT, updateProductDetails)
     .delete(verifyJWT, deleteProduct)
 
+router.route("/updateImage/:id").put(verifyJWT,upload.single('productImage'),updateProductImage)
 
 export default router

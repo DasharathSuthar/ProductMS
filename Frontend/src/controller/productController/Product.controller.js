@@ -16,7 +16,6 @@ class ProductController {
     async addProduct(productData) {
         try {
             const response = await axios.post(this.URL, productData, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } })
-            console.log(response.data);
             return response.data
 
         } catch (error) {
@@ -47,9 +46,20 @@ class ProductController {
         }
     }
 
-    async deleteProduct(id){
+    async updateProductImage(id, updatedImage) {
         try {
-            const response = await axios.delete(`${this.URL}${id}`,{withCredentials:true})
+            const response = await axios.put(`${this.URL}updateImage/${id}`, updatedImage, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } })
+            console.log(response);
+            
+            return response.data
+        } catch (error) {
+            return error
+        }
+    }
+
+    async deleteProduct(id) {
+        try {
+            const response = await axios.delete(`${this.URL}${id}`, { withCredentials: true })
             return response.data
         } catch (error) {
             return error

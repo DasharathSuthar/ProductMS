@@ -86,6 +86,33 @@ const updateProductDetails = asyncHandler(async (req, res) => {
 
 })
 
+const updateProductImage = asyncHandler(async (req, res) => {
+    const updateProductImageLocalPath = req.file?.path;
+
+    if (!updateProductImageLocalPath) {
+        throw new ApiError(400, "productImage file is required.")
+    }
+
+    const productImage = await uploadOnCloudinary(updateProductImageLocalPath)
+
+    if (!productImage.url) {
+        throw new ApiError(400, "Error while uploading on productImage.")
+    }
+
+    const product = await Product.findByIdAndUpdate(
+        req.params?.id,
+        {
+            
+            $set: {
+                img: productImage.url
+            },
+        },
+        { new: true }
+    )
+
+    return res.status(200).json(new ApiResponse(200, product, "Product image updated successfully."))
+})
+
 const deleteProduct = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id)
     if (!(user.role === "admin")) {
@@ -101,5 +128,6 @@ export {
     getAllProducts,
     getProductById,
     updateProductDetails,
-    deleteProduct
+    deleteProduct,
+    updateProductImage
 }
