@@ -143,19 +143,7 @@ CLOUDINARY_API_SECRET=your_api_secret
 
 ---
 
-## 📸 Screenshots
-
-_Add screenshots or UI images here if available._
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
 ## 👨‍💻 Author
 
 **Dasharath Suthar**  
-Feel free to contribute or raise issues!
+
