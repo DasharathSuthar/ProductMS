@@ -4,8 +4,10 @@ import { addWishItem, getWishList, removeWishList } from '../controllers/wishLis
 
 const router = Router()
 
-router.route("/list").get(verifyJWT, getWishList)
-router.route("/addList").post(verifyJWT, addWishItem)
-router.route("/removeList/:id").delete(verifyJWT, removeWishList)
+router.route("/")
+    .get(verifyJWT, getWishList)
+    .post(verifyJWT, addWishItem)
+
+router.route("/:id").delete(verifyJWT, removeWishList)
 
 export default router
