@@ -93,6 +93,15 @@ const getCurrentUser = asyncHandler(async (req, res) => {
     return res.status(200).json(new ApiResponse(200, req.user, "User fatched successfully."))
 })
 
+const getAllUsers = asyncHandler(async (req,res) => {
+    const users = await User.find({})
+    if (!users) {
+        throw new ApiError(400,"no users found")
+    }
+
+    return res.status(200).json(new ApiResponse(200,users,"Users facthed successfully."))
+})
+
 const changePassword = asyncHandler(async (req, res) => {
     const { oldPassword, newPassword } = req.body
 
@@ -119,5 +128,6 @@ export {
     loginUser,
     logoutUser,
     getCurrentUser,
-    changePassword
+    changePassword,
+    getAllUsers
 }

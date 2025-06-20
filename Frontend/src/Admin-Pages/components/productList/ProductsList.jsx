@@ -173,7 +173,7 @@ const ProductsList = () => {
                         </thead>
                         <tbody>
                             {(productsList || []).map((item, index) => {
-                                return (<tr key={index} >
+                                return (<tr key={item._id} >
                                     <td className='border border-black p-2'>{index + 1}</td>
                                     <td className='border border-black p-2'>
                                         <img className="w-20 h-20" src={item.img} alt="" />
