@@ -84,9 +84,9 @@ const Header = () => {
                                     <li>
                                         <button
                                             onClick={handleLogout}
-                                            className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-600 transition"
+                                            className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition"
                                         >
-                                            Logout
+                                            Logout <i className="fa-solid fa-arrow-right-from-bracket ml-1"></i>
                                         </button>
                                     </li>
                                 </>
@@ -95,17 +95,17 @@ const Header = () => {
                                     <li>
                                         <Link
                                             className="border border-white text-white px-4 py-2 rounded-md hover:bg-gray-600 hover:text-white transition"
-                                            to="/"
+                                            to="/signup"
                                         >
-                                            Sign Up
+                                            Sign Up <i className="fa-solid fa-user-plus"></i>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link
-                                            className="border border-white bg-white text-black px-4 py-2 rounded-md hover:bg-gray-600 transition"
+                                            className="border border-white bg-white text-black px-4 py-2 rounded-md hover:bg-gray-600 hover:text-white transition"
                                             to="/login"
                                         >
-                                            Log In
+                                            Log In <i className="fa-solid fa-arrow-right-to-bracket"></i>
                                         </Link>
                                     </li>
                                 </>

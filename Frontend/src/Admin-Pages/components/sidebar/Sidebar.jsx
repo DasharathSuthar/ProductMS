@@ -9,8 +9,8 @@ const Sidebar = () => {
                 </a>
                 <ul className='flex flex-col py-4 text-white uppercase '>
                     <li className='nav-list'><a href="/admin/dashboard" className='py-2 block'><i className='mr-4 fas fa-fw fa-tachometer-alt'></i>Dashboard</a></li>
-                    <li className='nav-list'><a href="/admin/productList" className='py-2 block'><i className="fa-solid fa-list-ul"></i>Products List</a></li>
-                    <li className='nav-list'><a href="/admin/users" className='py-2 block'><i className="fa-solid fa-users"></i>Users</a></li>
+                    <li className='nav-list'><a href="/admin/productList" className='py-2 block'><i className="fa-solid fa-list-ul mr-4 "></i>Products List</a></li>
+                    <li className='nav-list'><a href="/admin/users" className='py-2 block'><i className="fa-solid fa-users mr-4 "></i>Users</a></li>
                 </ul>
             </div>
         </aside>

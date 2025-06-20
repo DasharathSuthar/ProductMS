@@ -1,13 +1,12 @@
-import AdminRoutes from "./routes/adminRoutes/AdminRoutes"
-import ClientRoutes from "./routes/clientRoutes/ClientRoutes"
+import Routing from "./routes/Routing"
+
 
 
 function App() {
 
   return (
     <>
-      <AdminRoutes />
-      <ClientRoutes/>
+      <Routing/>
     </>
   )
 }

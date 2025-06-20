@@ -4,10 +4,19 @@ class UserController {
     
     URL = "http://localhost:5000/api/v1/users/"
 
+    async registerUser(userData){
+        try {
+            const response = await axios.post(`${this.URL}register`,userData,{withCredentials:true})
+            return response.data
+        } catch (error) {
+            return error
+        }
+    }
+
     async logInUser(userData) {
         try {
             const response = await axios.post(`${this.URL}login`,userData,{withCredentials:true})
-            console.log(response.data);
+
             return response.data
         } catch (error) {
             return error
