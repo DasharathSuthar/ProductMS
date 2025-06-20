@@ -1,9 +1,33 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { WishListControllerIns } from '../../../../controller/wishListController/wishList.controller.js'
 
 export const SingleProduct = () => {
     const location = useLocation()
-    const { name, img, description, price } = location.state || {}
+    const { name, img, description, price, id } = location.state || {}
+    const navigate = useNavigate()
+    const isAuthenticated = () => localStorage.getItem("userLoggedIn") !== null;
+
+    const addToWishList = async () => {
+        if (!isAuthenticated()) {
+            const confirm = window.confirm("To make wishList or cart item ? Login first!")
+            if (!confirm) {
+                return
+            }
+            navigate("/login", {
+                state: {
+                    redirectTo: "/singleproduct",
+                    productData: { name, img, description, price, id }
+                }
+            });
+            return;
+        }
+
+        await WishListControllerIns.addWishItem({ productId: id }).then(res => {
+            alert(res.message)
+        })
+
+    }
 
     return (
         <>
@@ -17,7 +41,9 @@ export const SingleProduct = () => {
                             <h1 className='font-semibold text-3xl'>{name} </h1>
                             <h3 className='text-xl font-semibold'>Price : {price} &#8377;</h3>
                             <p><span className='text-xl font-semibold'>Description</span> : {description} </p>
-                            <button className='bg-gray-700 text-white text-lg font-semibold p-4 rounded-md w-48'>Cart +</button>
+                            <button className='bg-gray-700 text-white text-lg font-semibold p-4 rounded-md w-48'
+                                onClick={addToWishList}
+                            >WishList +</button>
                         </div>
                     </div>
                 </div>

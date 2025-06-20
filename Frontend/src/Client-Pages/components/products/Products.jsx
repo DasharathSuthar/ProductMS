@@ -26,8 +26,7 @@ const Products = () => {
                     </div>
                     <div className='flex items-center flex-wrap gap-2'>
                         {(productList || []).map((item) => (
-                            <ProductCard key={item._id} img={item.img} name={item.name} description={item.des} price={item.price} />
-
+                            <ProductCard key={item._id} id={item._id} img={item.img} name={item.name} description={item.des} price={item.price} />
                         ))}
 
                     </div>

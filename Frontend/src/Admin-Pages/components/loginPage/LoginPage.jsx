@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { UserControllerIns } from "../../../controller/userController/user.controller.js";
 
 const Login = () => {
@@ -9,12 +9,14 @@ const Login = () => {
     })
 
 
-    const navigate = useNavigate(); // React Router navigation
+    const navigate = useNavigate();
+    const location = useLocation()
+    const { redirectTo, productData } = location.state || {};
 
     const handleLogin = async (e) => {
         e.preventDefault();
 
-        const loggedInUser = await UserControllerIns.logInUser(formData).then(res => {
+        await UserControllerIns.logInUser(formData).then(res => {
             alert(res.message)
             if (res.data.user.role === "admin") {
                 localStorage.setItem("adminLoggedIn", "true")
@@ -24,9 +26,19 @@ const Login = () => {
                 localStorage.setItem("userLoggedIn", JSON.stringify(res.data.user))
                 navigate("/")
             }
+
         })
-        console.log(loggedInUser);
-       
+
+        const redirectTo = location.state?.redirectTo;
+        const productData = location.state?.productData;
+
+        if (redirectTo && productData) {
+            navigate(redirectTo, { state: productData });
+        } else {
+            navigate("/");
+        }
+
+
     };
 
 

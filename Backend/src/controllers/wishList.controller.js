@@ -11,26 +11,26 @@ const addWishItem = asyncHandler(async (req, res) => {
         throw new ApiError(400, "User ID and Product ID are required")
     }
 
-    let wishList = await wishList.findOne({ userId })
+    let userWishList = await WishList.findOne({ userId })
 
-    if (wishList) {
-        const isAlreadyAdded = wishList.items.includes(productId);
+    if (userWishList) {
+        const isAlreadyAdded = userWishList.items.includes(productId);
 
         if (isAlreadyAdded) {
-            throw new ApiError(409, "Product is already in wishlist");
+            throw new ApiError(409, "Product is already in userWishList");
         }
 
         // Add new product
-        wishList.items.push(productId);
-        await wishList.save();
+        userWishList.items.push(productId);
+        await userWishList.save();
     } else {
-        // Create new wishlist
-        wishList = await WishList.create({
+        // Create new userWishList
+        userWishList = await WishList.create({
             userId,
             items: [productId]
         });
     }
-    return res.status(200).json(new ApiResponse(200, wishList, "Product added to wishlist"));
+    return res.status(200).json(new ApiResponse(200, userWishList, "Product added to userWishList"));
 
 })
 
