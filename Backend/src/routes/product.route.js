@@ -5,10 +5,14 @@ import { upload } from '../middlewares/multer.middlewear.js'
 
 const router = Router()
 
-router.route("/createProduct").post(verifyJWT, upload.single('productImage'), createProduct)
-router.route("/getAllProducts").get(getAllProducts)
-router.route("/productById/:id").get(getProductById)
-router.route("/updateProduct/:id").put(verifyJWT, updateProductDetails)
-router.route("/deleteProduct/:id").delete(verifyJWT, deleteProduct)
+router.route("/")
+    .post(verifyJWT, upload.single('productImage'), createProduct)
+    .get(getAllProducts)
+
+router.route("/:id")
+    .get(getProductById)
+    .put(verifyJWT, updateProductDetails)
+    .delete(verifyJWT, deleteProduct)
+
 
 export default router

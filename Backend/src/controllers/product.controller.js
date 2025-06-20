@@ -24,13 +24,13 @@ const createProduct = asyncHandler(async (req, res) => {
         throw new ApiError(409, "Product is already exist with same name.")
     }
 
-    
+
     const productImgLocalPath = req.file?.path;
 
     const productImage = await uploadOnCloudinary(productImgLocalPath)
 
     if (!productImage) {
-        throw new ApiError(400,"product image is missing")
+        throw new ApiError(400, "product image is missing")
     }
 
     const product = await Product.create({
@@ -71,13 +71,16 @@ const updateProductDetails = asyncHandler(async (req, res) => {
         throw new ApiError(400, "Unauthorized request. Admin only")
     }
 
-    const { name, price, img, des } = req.body
+    const { name, price, des } = req.body
 
-    if (!(name || price)) {
-        throw new ApiError(401, "all fields are required.")
+    if (!name || !price || !des) {
+        throw new ApiError(400, "Name, Price, and Description are required.");
     }
 
-    const updatedProduct = await Product.findByIdAndUpdate(req.params.id, { $set: { name, price, img, des } }, { new: true })
+    const updatedProduct = await Product.findByIdAndUpdate(req.params.id, { $set: { name, price, des } }, { new: true })
+    if (!updatedProduct) {
+        throw new ApiError(404, "Product not found.");
+    }
 
     return res.status(200).json(new ApiResponse(200, updatedProduct, "Product details Updated successfully."))
 
