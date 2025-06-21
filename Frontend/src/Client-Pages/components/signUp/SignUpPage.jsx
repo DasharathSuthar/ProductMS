@@ -35,6 +35,13 @@ const SignUpPage = () => {
                 navigate('/login')
             }
         } catch (error) {
+            setUserData({
+                fullName: "",
+                email: "",
+                username: "",
+                password: "",
+                role: ""
+            });
             const errMessage = error?.response?.data?.message
             toast.error(errMessage)
         }

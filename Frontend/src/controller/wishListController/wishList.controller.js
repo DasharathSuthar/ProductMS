@@ -8,7 +8,7 @@ class WishListController {
             const response = await axios.post(this.URL, item, { withCredentials: true })
             return response.data
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -17,7 +17,7 @@ class WishListController {
             const response = await axios.get(this.URL,{withCredentials:true})
             return response.data
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -26,7 +26,7 @@ class WishListController {
             const response = await axios.delete(`${this.URL}${id}`,{withCredentials:true})
             return response.data
         } catch (error) {
-            return error
+            throw error
         }
     }
 }

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { WishListControllerIns } from '../../../controller/wishListController/wishList.controller'
 import ProductCard from '../products/productCard/ProductCard'
+import { toast } from 'react-toastify'
+import 'react-toastify/ReactToastify.css'
 
 const WishList = () => {
 
@@ -26,9 +28,20 @@ const WishList = () => {
             const items = listItem?.data?.List?.items || listItem?.data?.List?.[0]?.items || []
             setWishList(items)
         } catch (err) {
-            setError("Failed to fetch wishlist.")
+            setError("wish list is empty.")
         } finally {
             setLoading(false)
+        }
+    }
+
+    const removeWishItem = async (id) => {
+        try {
+            const res = await WishListControllerIns.removeWishItem(id)
+            toast.success(res.message)
+            getWishList()
+        } catch (error) {
+            const errMessage = error?.response?.data?.message
+            toast.error(errMessage)
         }
     }
 
@@ -56,13 +69,17 @@ const WishList = () => {
                     ) : (
                         <div className='flex items-center flex-wrap gap-2'>
                             {wishList.map((item) => (
-                                <div key={item._id}>
+                                <div key={item._id} className='flex justify-center items-center flex-col'>
                                     <ProductCard
+                                        id={item._id}
                                         name={item.name}
                                         img={item.img}
                                         price={item.price}
                                         description={item.des}
+                                        removebtn={"Remove"}
+                                        handleRemove={removeWishItem}
                                     />
+
                                 </div>
                             ))}
                         </div>

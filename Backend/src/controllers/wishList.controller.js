@@ -36,7 +36,7 @@ const addWishItem = asyncHandler(async (req, res) => {
 
 const getWishList = asyncHandler(async (req, res) => {
     const userId = req.user._id;
-    const userWishList  = await WishList.findOne({userId}).populate("userId").populate("items")
+    const userWishList = await WishList.findOne({ userId }).populate("userId").populate("items")
 
     if (!userWishList) {
         throw new ApiError(400, "WishList is Empty.")
@@ -44,11 +44,33 @@ const getWishList = asyncHandler(async (req, res) => {
 
     return res.status(200).json(new ApiResponse(200, { List: userWishList }, "List facthed."))
 })
-
 const removeWishList = asyncHandler(async (req, res) => {
-    await WishList.findByIdAndDelete(req.params.id)
-    return res.status(200).json(new ApiResponse(200, {}, "WishItem Removed."))
-})
+    const userId = req.user._id;
+    const productId  = req.params.id;
+
+    if (!userId || !productId) {
+        throw new ApiError(400, "User ID and Product ID are required");
+    }
+
+    const userWishList = await WishList.findOne({ userId });
+
+    if (!userWishList) {
+        throw new ApiError(404, "Wishlist not found");
+    }
+
+    const itemIndex = userWishList.items.indexOf(productId);
+    if (itemIndex === -1) {
+        throw new ApiError(404, "Product not found in wishlist");
+    }
+
+    userWishList.items.splice(itemIndex, 1); 
+    await userWishList.save();
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, userWishList, "Product removed from wishlist"));
+});
+
 
 export {
     getWishList,
