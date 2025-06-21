@@ -16,7 +16,9 @@ const generateAccessToken = async (userId) => {
 
 const options = {
     httpOnly: true,
-    secure: true
+    secure: true,
+    sameSite: "None",
+    maxAge: 7 * 24 * 60 * 60 * 1000
 }
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -93,13 +95,13 @@ const getCurrentUser = asyncHandler(async (req, res) => {
     return res.status(200).json(new ApiResponse(200, req.user, "User fatched successfully."))
 })
 
-const getAllUsers = asyncHandler(async (req,res) => {
+const getAllUsers = asyncHandler(async (req, res) => {
     const users = await User.find({})
     if (!users) {
-        throw new ApiError(400,"no users found")
+        throw new ApiError(400, "no users found")
     }
 
-    return res.status(200).json(new ApiResponse(200,users,"Users facthed successfully."))
+    return res.status(200).json(new ApiResponse(200, users, "Users facthed successfully."))
 })
 
 const changePassword = asyncHandler(async (req, res) => {
