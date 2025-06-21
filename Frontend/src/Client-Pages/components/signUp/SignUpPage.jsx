@@ -1,7 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { UserControllerIns } from '../../../controller/userController/user.controller';
 import { useState } from 'react';
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/ReactToastify.css'
 const SignUpPage = () => {
     const navigate = useNavigate();
     const [userData, setUserData] = useState({
@@ -20,8 +21,9 @@ const SignUpPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await UserControllerIns.registerUser(userData).then(res => {
-            alert(res.message)
+        try {
+            const res = await UserControllerIns.registerUser(userData)
+            toast.success(res.message)
             setUserData({
                 fullName: "",
                 email: "",
@@ -32,23 +34,26 @@ const SignUpPage = () => {
             if (res.statusCode === 200) {
                 navigate('/login')
             }
-
-        })
+        } catch (error) {
+            const errMessage = error?.response?.data?.message
+            toast.error(errMessage)
+        }
 
     };
 
 
     return (
         <>
+            <ToastContainer position='top-center' autoClose={3000} />
             <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-b from-gray-800 to-gray-400">
                 <div className="bg-gray-200 rounded-lg p-8 w-[500px] shadow-lg border-2">
                     <h2 className="text-3xl font-bold text-center text-black mb-4">Sign Up</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="grid grid-cols-2 gap-4">
-                            <input type="text" name="fullName" placeholder="Full Name" value={userData.fullName} onChange={handleChange} className="w-full border border-black rounded-md p-2 focus:outline-none " required />
-                            <input type="email" name="email" placeholder="Email" value={userData.email} onChange={handleChange} className="w-full border border-black rounded-md p-2 focus:outline-none " required />
-                            <input type="text" name="username" placeholder="Username" value={userData.username} onChange={handleChange} className="w-full border border-black rounded-md p-2 focus:outline-none " required />
-                            <input type="password" name="password" placeholder="Password" value={userData.password} onChange={handleChange} className="w-full border border-black rounded-md p-2 focus:outline-none " required />
+                            <input type="text" name="fullName" placeholder="Full Name" value={userData.fullName} onChange={handleChange} className="w-full border border-black rounded-md p-2 focus:outline-none " />
+                            <input type="email" name="email" placeholder="Email" value={userData.email} onChange={handleChange} className="w-full border border-black rounded-md p-2 focus:outline-none " />
+                            <input type="text" name="username" placeholder="Username" value={userData.username} onChange={handleChange} className="w-full border border-black rounded-md p-2 focus:outline-none " />
+                            <input type="password" name="password" placeholder="Password" value={userData.password} onChange={handleChange} className="w-full border border-black rounded-md p-2 focus:outline-none " />
                             <select type="text" name="role" value={userData.role} onChange={handleChange} className="w-full border  border-black rounded-md p-2 focus:outline-none ">
                                 <option value="">Select Role</option>
                                 <option value="user">User</option>

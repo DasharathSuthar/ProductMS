@@ -9,7 +9,7 @@ class UserController {
             const response = await axios.post(`${this.URL}register`,userData,{withCredentials:true})
             return response.data
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -19,7 +19,7 @@ class UserController {
 
             return response.data
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -28,7 +28,7 @@ class UserController {
             const response = await axios.get(this.URL)
             return response.data
         } catch (error) {
-            return error
+            throw error
         }
     }
 }

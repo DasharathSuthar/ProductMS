@@ -23,7 +23,7 @@ const Header = () => {
         alert("Logged out successfully!");
         setIsLoggedIn(false);
         navigate("/");
-        // window.dispatchEvent(new Event("storage")); // Notify other tabs/components
+        
     };
     useEffect(() => {
         checkLoginStatus()
@@ -32,7 +32,7 @@ const Header = () => {
 
     return (
         <>
-            <header className='bg-gray-700 w-full text-white h-20 '>
+            <header className=' bg-gradient-to-b from-[#111132] to-[#0c0c1d] w-full text-white h-20 '>
                 <div className='conatiner w-[1000px] h-full m-auto flex justify-between items-center px-2'>
                     <div className='logo text-2xl font-semibold  '>
                         <Link to="/" >

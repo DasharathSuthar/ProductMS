@@ -9,7 +9,7 @@ class ProductController {
 
             return response.data
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -19,7 +19,7 @@ class ProductController {
             return response.data
 
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -28,7 +28,7 @@ class ProductController {
             const response = await axios.get(`${this.URL}${id}`)
             return response.data
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -42,7 +42,7 @@ class ProductController {
             })
             return response.data
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -53,7 +53,7 @@ class ProductController {
             
             return response.data
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -62,7 +62,7 @@ class ProductController {
             const response = await axios.delete(`${this.URL}${id}`, { withCredentials: true })
             return response.data
         } catch (error) {
-            return error
+            throw error
         }
     }
 }

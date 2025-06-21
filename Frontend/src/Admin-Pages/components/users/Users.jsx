@@ -5,7 +5,7 @@ const Users = () => {
   const [usersList, setUsersList] = useState([])
 
   const getUsersList = async () => {
-    const users = await UserControllerIns.getAllUsers() 
+    const users = await UserControllerIns.getAllUsers()
     setUsersList(users.data)
   }
 
@@ -16,7 +16,7 @@ const Users = () => {
   return (
     <>
       <div className='pb-6 text-xl uppercase text-black ' >
-        <h1>Products List</h1>
+        <h1>Users List</h1>
         <hr className="border-t border-gray-600 mt-3" />
       </div>
       <div className='p-1 mb-2 flex justify-between items-center w-full'>
@@ -24,6 +24,7 @@ const Users = () => {
           <table className='text-left  overflow-x-auto'>
             <thead>
               <tr className='[&>*]:p-2'>
+                <th className='border border-black'>No.</th>
                 <th className='border border-black'>ID</th>
                 <th className='border border-black'>Username</th>
                 <th className='border border-black'>Full Name</th>
@@ -35,6 +36,7 @@ const Users = () => {
             <tbody>
               {(usersList || []).map((item, index) => {
                 return (<tr key={item._id} >
+                  <td className='border border-black p-2'>{index + 1}</td>
                   <td className='border border-black p-2'>{item._id}</td>
 
                   <td className='border border-black p-2'>

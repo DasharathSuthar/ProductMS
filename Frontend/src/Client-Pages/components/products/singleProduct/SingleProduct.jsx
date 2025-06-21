@@ -31,9 +31,9 @@ import { WishListControllerIns } from '../../../../controller/wishListController
 
     return (
         <>
-            <div className=' py-10 bg-gradient-to-b from-[#111132] to-[#0c0c1d] h-[100vh]'>
+            <div className=' py-10 bg-gradient-to-b from-[#0c0c1d] to-[#111132] h-[100vh]'>
                 <div className='max-w-[1000px] mx-auto h-full'>
-                    <div className='box flex items-center bg-gray-800 p-2 rounded-lg h-[500px] gap-3'>
+                    <div className='box flex shadow-sm shadow-white items-center bg-gradient-to-b from-[#0c0c1d] to-[#111132] p-2 rounded-lg h-[500px] gap-3'>
                         <div className='h-[450px] p-3 border rounded-lg flex items-center justify-center border-gray-700'>
                             <img className='rounded-md h-[400px] w-full border border-white object-cover ' src={img} alt="" />
                         </div>

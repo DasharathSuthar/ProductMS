@@ -27,10 +27,14 @@ const createProduct = asyncHandler(async (req, res) => {
 
     const productImgLocalPath = req.file?.path;
 
+    if (!productImgLocalPath) {
+        throw new ApiError(400, "Product Image file is required . ")
+    }
+
     const productImage = await uploadOnCloudinary(productImgLocalPath)
 
     if (!productImage) {
-        throw new ApiError(400, "product image is missing")
+        throw new ApiError(400, "Issues when uploading file try agains later. ")
     }
 
     const product = await Product.create({
