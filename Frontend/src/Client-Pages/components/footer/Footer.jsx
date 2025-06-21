@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <>
       <footer className="pt-16  bg-gradient-to-b from-[#111132] to-[#0c0c1d]">
-        <div className="container ">
+       
           <div className="py-9 ">
             <div className="flex justify-between items-center max-w-[1000px] m-auto ">
               {/* Brand & Contact */}
@@ -34,12 +34,12 @@ const Footer = () => {
                 </ul>
               </div>
             </div>
-          </div>
+          
         </div>
 
         {/* Copyright & Social Media */}
         <div className="py-5 bg-gradient-to-b from-[#0c0c1d] to-[#111132]">
-          <div className="container  ">
+          
             <div className="flex justify-between items-center text-gray-300 max-w-[1000px] m-auto">
               <p>&copy; ProductMS. Designed By Suthar Dasharath. All Rights Reserved.</p>
               <div className="flex space-x-4 text-xl">
@@ -48,7 +48,7 @@ const Footer = () => {
                 <Link to="#" className="text-gray-300 hover:text-white transition"><i className="fa-brands fa-square-x-twitter"></i></Link>
               </div>
             </div>
-          </div>
+         
         </div>
       </footer>
     </>

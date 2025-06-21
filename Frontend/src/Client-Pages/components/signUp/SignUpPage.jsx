@@ -57,11 +57,11 @@ const SignUpPage = () => {
                     <h2 className="text-3xl font-bold text-center text-black mb-4">Sign Up</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="grid grid-cols-2 gap-4">
-                            <input type="text" name="fullName" placeholder="Full Name" value={userData.fullName} onChange={handleChange} className="w-full border border-black rounded-md p-2 focus:outline-none " />
-                            <input type="email" name="email" placeholder="Email" value={userData.email} onChange={handleChange} className="w-full border border-black rounded-md p-2 focus:outline-none " />
-                            <input type="text" name="username" placeholder="Username" value={userData.username} onChange={handleChange} className="w-full border border-black rounded-md p-2 focus:outline-none " />
-                            <input type="password" name="password" placeholder="Password" value={userData.password} onChange={handleChange} className="w-full border border-black rounded-md p-2 focus:outline-none " />
-                            <select type="text" name="role" value={userData.role} onChange={handleChange} className="w-full border  border-black rounded-md p-2 focus:outline-none ">
+                            <input type="text" name="fullName" placeholder="Full Name" value={userData.fullName} onChange={handleChange} className="w-full border border-gray-700 rounded-md p-2 focus:outline-none " />
+                            <input type="email" name="email" placeholder="Email" value={userData.email} onChange={handleChange} className="w-full border border-gray-700 rounded-md p-2 focus:outline-none " />
+                            <input type="text" name="username" placeholder="Username" value={userData.username} onChange={handleChange} className="w-full border border-gray-700 rounded-md p-2 focus:outline-none " />
+                            <input type="password" name="password" placeholder="Password" value={userData.password} onChange={handleChange} className="w-full border border-gray-700 rounded-md p-2 focus:outline-none " />
+                            <select type="text" name="role" value={userData.role} onChange={handleChange} className="w-full border  border-gray-700 rounded-md p-2 focus:outline-none ">
                                 <option value="">Select Role</option>
                                 <option value="user">User</option>
                                 <option value="admin">Admin</option>
@@ -72,7 +72,7 @@ const SignUpPage = () => {
                         </button>
                         <div className="text-center my-4">
                             Already have a account?
-                            <Link to="/login" className="text-sm text-blue-600 hover:underline">
+                            <Link to="/login" className="text-sm ml-2 text-blue-600 hover:underline">
                                 Login here!
                             </Link>
                         </div>

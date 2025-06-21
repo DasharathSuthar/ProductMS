@@ -67,7 +67,7 @@ const Login = () => {
                                 placeholder="Email"
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
 
                             />
                         </div>
@@ -82,7 +82,7 @@ const Login = () => {
                                 placeholder="Password"
                                 value={formData.password}
                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
 
                             />
                         </div>
@@ -90,7 +90,7 @@ const Login = () => {
                         {/* Login Button */}
                         <button
                             type="submit"
-                            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+                            className="w-full bg-gray-600 text-white py-2 rounded-md hover:bg-gray-700 transition"
                         >
                             LOGIN
                         </button>
@@ -98,7 +98,7 @@ const Login = () => {
 
                     {/* Back to Home */}
                     <div className="mt-4 text-center">
-                        <a href="/" className="text-blue-500 hover:underline">
+                        <a href="/" className="text-gray-500 hover:underline">
                             Back to Home
                         </a>
                     </div>
