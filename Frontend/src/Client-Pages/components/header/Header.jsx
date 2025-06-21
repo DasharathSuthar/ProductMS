@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom"
+import { UserControllerIns } from "../../../controller/userController/user.controller";
+import { toast, ToastContainer } from "react-toastify";
 
 const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -17,13 +19,19 @@ const Header = () => {
         }
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem("userLoggedIn");
-        setUsername("")
-        alert("Logged out successfully!");
-        setIsLoggedIn(false);
-        navigate("/");
-        
+    const handleLogout = async () => {
+        try {
+            const res = await UserControllerIns.logoutUser()
+            localStorage.removeItem("userLoggedIn");
+            setUsername("")
+            toast.success(res.message || "Logged out successfully!")
+            setIsLoggedIn(false);
+            navigate("/");
+        } catch (error) {
+            const errMessage = error?.response?.data?.message
+            toast.error(errMessage || "Logout failed")
+        }
+
     };
     useEffect(() => {
         checkLoginStatus()
@@ -32,6 +40,7 @@ const Header = () => {
 
     return (
         <>
+            <ToastContainer position="top-center" autoClose={2000} />
             <header className=' bg-gradient-to-b from-[#111132] to-[#0c0c1d] w-full text-white h-20 '>
                 <div className='conatiner w-[1000px] h-full m-auto flex justify-between items-center px-2'>
                     <div className='logo text-2xl font-semibold  '>

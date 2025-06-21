@@ -31,6 +31,15 @@ class UserController {
             throw error
         }
     }
+
+    async logoutUser(){
+        try {
+            const response = await axios.post(this.URL)
+            return response.data
+        } catch (error) {
+            throw error
+        }
+    }
 }
 
 export const UserControllerIns = new UserController()
