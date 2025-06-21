@@ -5,7 +5,7 @@ import { ApiError } from './utils/ApiError.js'
 const app = express()
 
 app.use(cors({
-    origin: "https://productms.onrender.com",
+    origin: "https://productms-frontend.onrender.com",
     credentials: true
 }))
 app.use(express.json())
