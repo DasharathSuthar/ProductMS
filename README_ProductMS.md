@@ -10,54 +10,44 @@
 ### Backend (`/Backend`)
 
 ```
-src/
-├── controllers/
-│   ├── product.controller.js
-│   ├── user.controller.js
-│   └── wishList.controller.js
-├── db/
-│   └── index.js
-├── middlewears/
-│   ├── auth.middlewear.js
-│   └── multer.middlewear.js
-├── models/
-│   ├── user.model.js
-│   ├── product.model.js
-│   └── wishList.model.js
-├── routes/
-│   ├── user.route.js
-│   ├── product.route.js
-│   └── wishList.route.js
-├── utils/
-│   ├── ApiError.js
-│   ├── ApiResponse.js
-│   ├── asyncHandler.js
-│   └── cloudinary.js
-├── app.js
-├── index.js
-├── .env
-├── .gitignore
-└── package.json
+│ ├── node_modules/
+│ ├── public/temp/ # Temporary storage (e.g., uploads)
+│ ├── src/
+│ │ ├── controllers/ # Express route handlers
+│ │ ├── db/ # Database connection
+│ │ ├── middlewares/ # Middleware (e.g., auth, multer)
+│ │ ├── models/ # Mongoose schemas
+│ │ ├── routes/ # Express routes
+│ │ ├── utils/ # Utility functions
+│ │ ├── app.js # Express app instance
+│ │ └── index.js # Entry point for backend
+│ ├── .env # Environment variables
+│ ├── package.json
+│ └── package-lock.json
 ```
 
 ### Frontend (`/Frontend`)
 
 ```
-src/
-├── Admin-Pages/components/
-├── Client-Pages/components/
-├── controller/
-│   ├── product.controller.js
-│   ├── user.controller.js
-│   └── wishList.controller.js
-├── routes/
-│   ├── user.route.js
-│   ├── product.route.js
-│   └── wishList.route.js
-├── app.jsx
-├── index.css
-├── index.js
-└── main.jsx
+│ ├── node_modules/
+│ ├── public/
+│ │ ├── fontawesome-free-6.6.0-web/
+│ │ └── AdminLogo.jpg
+│ ├── src/
+│ │ ├── Admin-Pages/ # Admin dashboard components/pages
+│ │ ├── Client-Pages/ # Client-side components/pages
+│ │ ├── assets/ # Static images, fonts, etc.
+│ │ ├── controller/ # Frontend API calls
+│ │ ├── routes/ # React Router routes
+│ │ ├── App.jsx # Root component
+│ │ ├── App.css
+│ │ ├── index.js
+│ │ └── main.jsx # Vite entry point
+│ ├── index.html
+│ ├── package.json
+│ ├── tailwind.config.js
+│ ├── postcss.config.js
+│ ├── vite.config.js
 ```
 
 ---
