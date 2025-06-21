@@ -5,11 +5,10 @@ class ProductController {
 
     async getProductsList() {
         try {
-            const response = await axios.get(this.URL)
-
+            const response = await axios.get(this.URL,{withCredentials:true})
             return response.data
         } catch (error) {
-            throw error
+            throw error 
         }
     }
 
