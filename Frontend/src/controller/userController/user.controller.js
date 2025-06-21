@@ -2,7 +2,7 @@ import axios from "axios"
 
 class UserController {
 
-    URL = "http://localhost:5000/api/v1/users/"
+    URL = "https://productms.onrender.com/api/v1/users/"
 
     async registerUser(userData) {
         try {

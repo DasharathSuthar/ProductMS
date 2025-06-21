@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 class ProductController {
-    URL = "http://localhost:5000/api/v1/products/"
+    URL = "https://productms.onrender.com/api/v1/products/"
 
     async getProductsList() {
         try {

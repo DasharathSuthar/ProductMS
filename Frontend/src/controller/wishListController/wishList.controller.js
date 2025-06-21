@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 class WishListController {
-    URL = "http://localhost:5000/api/v1/wishLists/"
+    URL = "https://productms.onrender.com/api/v1/wishLists/"
 
     async addWishItem(item) {
         try {
