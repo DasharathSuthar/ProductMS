@@ -10,6 +10,10 @@ export default defineConfig({
         target:'http://localhost:5000',
         changeOrigin:true
       }
-    }
+    },
+    host:"0.0.0.0",
+    fs:{
+      strict:false,
+    },
   }
 })

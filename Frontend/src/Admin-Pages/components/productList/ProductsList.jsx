@@ -188,7 +188,7 @@ const ProductsList = () => {
                 <div className='flex flex-wrap gap-1 items-center'>
                     {!isEdit && !isImageEdit && (
                         <button
-                            className='py-2 px-5 w-40 bg-blue-500 rounded-md text-white uppercase hover:bg-blue-700 duration-300 disabled:opacity-50'
+                            className='py-2 px-5 w-40 bg-gray-500 rounded-md text-white uppercase hover:bg-gray-700 duration-300  cursor-pointer'
                             onClick={insertProductData}
                             disabled={globalLoading}
                         >
@@ -218,8 +218,8 @@ const ProductsList = () => {
                 </div>
             </div>
 
-            <div className='p-1 mb-2 flex justify-between items-center w-full'>
-                <div className="grid grid-cols-1 w-full">
+            <div className='p-1 mb-2 flex  items-center w-full'>
+                <div className="w-full">
                     <table className='text-left capitalize overflow-x-auto'>
                         <thead>
                             <tr className='[&>*]:p-2'>
@@ -247,7 +247,7 @@ const ProductsList = () => {
                                     <td className='border border-black p-2'>{item.status}</td>
                                     <td className='border border-black p-2'>
                                         <button
-                                            className='px-5 py-2 rounded-lg bg-blue-700 text-white text-center'
+                                            className='px-5 py-2 rounded-lg bg-gray-700 text-white text-center'
                                             onClick={() => getProductById(item._id)}
                                         >
                                             Edit
@@ -255,7 +255,7 @@ const ProductsList = () => {
                                     </td>
                                     <td className='border w-36 border-black p-2'>
                                         <button
-                                            className='px-5 py-2 rounded-lg bg-blue-700 text-white text-center'
+                                            className='px-5 py-2 rounded-lg bg-gray-700 text-white text-center'
                                             onClick={() => getImage(item._id)}
                                         >
                                             Edit Image

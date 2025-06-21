@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { NavLink, Link, useNavigate } from "react-router-dom"
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { UserControllerIns } from "../../../controller/userController/user.controller";
 import { toast, ToastContainer } from "react-toastify";
 import { WishListControllerIns } from "../../../controller/wishListController/wishList.controller";
 
 const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [username, setUsername] = useState("")
-    const [count, setCount] = useState(0)
-    const navigate = useNavigate()
+    const [username, setUsername] = useState("");
+    const [count, setCount] = useState(0);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     const checkLoginStatus = () => {
         const user = JSON.parse(localStorage.getItem("userLoggedIn"));
         if (user) {
-
             setIsLoggedIn(true);
             setUsername(user.username);
         } else {
@@ -23,61 +23,66 @@ const Header = () => {
 
     const handleLogout = async () => {
         try {
-            const res = await UserControllerIns.logoutUser()
+            const res = await UserControllerIns.logoutUser();
             localStorage.removeItem("userLoggedIn");
-            setUsername("")
-            toast.success(res.message || "Logged out successfully!")
+            setUsername("");
+            toast.success(res.message || "Logged out successfully!");
             setIsLoggedIn(false);
             navigate("/");
         } catch (error) {
-            const errMessage = error?.response?.data?.message
-            toast.error(errMessage || "Logout failed")
+            const errMessage = error?.response?.data?.message;
+            toast.error(errMessage || "Logout failed");
         }
-
     };
 
     const isAuthenticated = () => localStorage.getItem("userLoggedIn") !== null;
 
     const getWishList = async () => {
-        const authStatus = isAuthenticated()
-        if (!authStatus) {
-            return
-        }
+        if (!isAuthenticated()) return;
 
         try {
-            const listItem = await WishListControllerIns.getWishList()
-            const items = listItem?.data?.List?.items || listItem?.data?.List?.[0]?.items || []
-            setCount(items.length)
-
+            const listItem = await WishListControllerIns.getWishList();
+            const items = listItem?.data?.List?.items || listItem?.data?.List?.[0]?.items || [];
+            setCount(items.length);
         } catch (error) {
-            toast.error(error?.response?.data?.message)
+            toast.error(error?.response?.data?.message);
         }
-    }
+    };
 
     useEffect(() => {
-        checkLoginStatus()
-        getWishList()
-    }, [])
-
+        checkLoginStatus();
+        getWishList();
+    }, []);
 
     return (
         <>
             <ToastContainer position="top-center" autoClose={2000} />
-            <header className=' bg-gradient-to-b from-[#111132] to-[#0c0c1d] w-full text-white h-20 '>
-                <div className='conatiner w-[1000px] h-full m-auto flex justify-between items-center px-2'>
-                    <div className='logo text-2xl font-semibold  '>
-                        <Link to="/" >
-                            <h2>ProductMS</h2>
+            <header className='bg-gradient-to-b from-[#111132] to-[#0c0c1d] text-white h-20'>
+                <div className='container max-w-[1200px] mx-auto flex items-center justify-between h-full px-4'>
+                    {/* Logo */}
+                    <div className='text-2xl font-bold'>
+                        <Link to="/">
+                            ProductMS
                         </Link>
-                        <hr className='w-32 mt-2' />
+                        <hr className='w-24 mt-1' />
                     </div>
-                    <div className="links">
-                        <ul className="flex items-center justify-between gap-5 text-lg font-semibold">
+
+                    {/* Hamburger Button */}
+                    <div className="md:hidden">
+                        <button onClick={() => setMenuOpen(!menuOpen)}>
+                            <i className={`fas fa-${menuOpen ? "times" : "bars"} text-2xl`}></i>
+                        </button>
+                    </div>
+
+                    {/* Navigation Links */}
+                    <nav className={`absolute md:static top-20 left-0 w-full md:w-auto bg-[#0c0c1d] md:bg-transparent transition-all duration-300 ease-in-out z-50 ${menuOpen ? "block" : "hidden"} md:flex`}>
+                        <ul className="flex flex-col md:flex-row gap-6 md:gap-5 text-lg font-semibold items-center p-5 md:p-0">
                             <li>
                                 <NavLink
                                     to="/"
+                                    onClick={() => setMenuOpen(false)}
                                     className={({ isActive }) =>
-                                        isActive ? "border-white border-b " : ""
+                                        isActive ? "border-b border-white" : ""
                                     }
                                 >
                                     Home
@@ -86,8 +91,9 @@ const Header = () => {
                             <li>
                                 <NavLink
                                     to="/products"
+                                    onClick={() => setMenuOpen(false)}
                                     className={({ isActive }) =>
-                                        isActive ? "border-white border-b " : ""
+                                        isActive ? "border-b border-white" : ""
                                     }
                                 >
                                     Products
@@ -96,26 +102,23 @@ const Header = () => {
                             <li>
                                 <NavLink
                                     to="/wishList"
+                                    onClick={() => setMenuOpen(false)}
                                     className={({ isActive }) =>
-                                        isActive ? "border-white border-b " : ""
+                                        isActive ? "border-b border-white" : ""
                                     }
                                 >
-                                    WishList <i className="fa-solid fa-cart-shopping"></i><sup className="text-lg ml-1">{count}</sup>
+                                    WishList <i className="fa-solid fa-cart-shopping"></i><sup className="ml-1">{count}</sup>
                                 </NavLink>
                             </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <ul className="flex space-x-4 items-center">
+
+                            {/* Auth Links */}
                             {isLoggedIn ? (
                                 <>
-                                    <li className="flex items-center shadow-sm">
-                                        <span className="text-lg font-semibold  text-white">Welcome {username} </span>
-                                    </li>
+                                    <li className="text-white">Welcome {username}</li>
                                     <li>
                                         <button
-                                            onClick={handleLogout}
-                                            className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition"
+                                            onClick={() => { handleLogout(); setMenuOpen(false); }}
+                                            className="bg-gray-800 px-4 py-2 rounded-md hover:bg-gray-600"
                                         >
                                             Logout <i className="fa-solid fa-arrow-right-from-bracket ml-1"></i>
                                         </button>
@@ -125,16 +128,18 @@ const Header = () => {
                                 <>
                                     <li>
                                         <Link
-                                            className="border border-white text-white px-4 py-2 rounded-md hover:bg-gray-600 hover:text-white transition"
                                             to="/signup"
+                                            onClick={() => setMenuOpen(false)}
+                                            className="border border-white px-4 py-2 rounded-md hover:bg-gray-600"
                                         >
                                             Sign Up <i className="fa-solid fa-user-plus"></i>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link
-                                            className="border border-white bg-white text-black px-4 py-2 rounded-md hover:bg-gray-600 hover:text-white transition"
                                             to="/login"
+                                            onClick={() => setMenuOpen(false)}
+                                            className="border border-white bg-white text-black px-4 py-2 rounded-md hover:bg-gray-600 hover:text-white"
                                         >
                                             Log In <i className="fa-solid fa-arrow-right-to-bracket"></i>
                                         </Link>
@@ -142,11 +147,11 @@ const Header = () => {
                                 </>
                             )}
                         </ul>
-                    </div>
+                    </nav>
                 </div>
             </header>
         </>
-    )
-}
+    );
+};
 
-export default Header
+export default Header;
