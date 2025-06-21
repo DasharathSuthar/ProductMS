@@ -1,5 +1,5 @@
 import { motion, stagger } from "framer-motion"
-
+import {Link} from 'react-router-dom'
 const variants = {
     open: {
         transition: {
@@ -43,7 +43,16 @@ const Links = () => {
         <motion.div className='flex absolute flex-col w-full h-full justify-center items-center gap-5' variants={variants}>
             {
                 items.map(item => (
-                    <motion.a href={item.to} className='text-2xl' key={item.name} variants={itemVariants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>{item.name}</motion.a>
+                    <Link to={item.to} key={item.name}>
+                        <motion.div
+                            className='text-2xl cursor-pointer'
+                            variants={itemVariants}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            {item.name}
+                        </motion.div>
+                    </Link>
                 ))
             }
         </motion.div>
