@@ -132,7 +132,7 @@ const ProductsList = () => {
                 <hr className="border-t border-gray-600 mt-3" />
             </div>
 
-            <div className='p-1 mb-2 flex justify-between items-center'>
+            <div className='p-1 mb-2 flex  justify-between items-center'>
                 <div className='flex flex-wrap justify-between gap-1 items-center [&>*]:mb-0'>
                     {!isImageEdit && (
                         <>
@@ -220,7 +220,7 @@ const ProductsList = () => {
 
             <div className='p-1 mb-2 flex  items-center w-full'>
                 <div className="w-full">
-                    <table className='text-left capitalize overflow-x-auto'>
+                    <table className='text-left w-full capitalize overflow-x-auto'>
                         <thead>
                             <tr className='[&>*]:p-2'>
                                 <th className='border border-black'>ID</th>

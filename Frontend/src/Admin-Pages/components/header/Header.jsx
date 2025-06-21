@@ -28,7 +28,7 @@ const Header = () => {
     return (
         <>
             <ToastContainer position="top-center" autoClose={2000} />
-            <header className="bg-gray-700 text-white pl-16 pr-4 py-3 shadow-md">
+            <header className="bg-gray-700   text-white pl-16 pr-4 py-7 shadow-md">
                 <div className="max-w-[1000px] mx-auto flex flex-wrap justify-between items-center gap-3">
                     <div>
                         <h1 className="text-2xl font-bold">ProductMS</h1>

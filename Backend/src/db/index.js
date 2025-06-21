@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(`${process.env.DATABASE_URI}/productMS`)
+        await mongoose.connect(`${process.env.ATLAS_DB}`)
             .then(()=>{
                 console.log("MonogDB Connected !!");
             })

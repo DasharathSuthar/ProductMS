@@ -45,7 +45,7 @@ const Header = () => {
             const items = listItem?.data?.List?.items || listItem?.data?.List?.[0]?.items || [];
             setCount(items.length);
         } catch (error) {
-            toast.error(error?.response?.data?.message);
+           
         }
     };
 
