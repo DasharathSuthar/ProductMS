@@ -27,7 +27,7 @@ const WishList = () => {
             const items = listItem?.data?.List?.items || listItem?.data?.List?.[0]?.items || [];
             setWishList(items);
         } catch (err) {
-            setError("Unable to fetch wishlist.");
+            setError("empty wishlist.");
         } finally {
             setLoading(false);
         }
@@ -64,7 +64,7 @@ const WishList = () => {
                 ) : wishList.length === 0 ? (
                     <p className='text-gray-400 text-center'>Your wishlist is empty.</p>
                 ) : (
-                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6'>
                         {wishList.map((item) => (
                             <ProductCard
                                 key={item._id}
