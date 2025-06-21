@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom"
 import { UserControllerIns } from "../../../controller/userController/user.controller";
 import { toast, ToastContainer } from "react-toastify";
+import { WishListControllerIns } from "../../../controller/wishListController/wishList.controller";
 
 const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUsername] = useState("")
+    const [count, setCount] = useState(0)
     const navigate = useNavigate()
 
     const checkLoginStatus = () => {
@@ -33,8 +35,28 @@ const Header = () => {
         }
 
     };
+
+    const isAuthenticated = () => localStorage.getItem("userLoggedIn") !== null;
+
+    const getWishList = async () => {
+        const authStatus = isAuthenticated()
+        if (!authStatus) {
+            return
+        }
+
+        try {
+            const listItem = await WishListControllerIns.getWishList()
+            const items = listItem?.data?.List?.items || listItem?.data?.List?.[0]?.items || []
+            setCount(items.length)
+
+        } catch (error) {
+            toast.error(error?.response?.data?.message)
+        }
+    }
+
     useEffect(() => {
         checkLoginStatus()
+        getWishList()
     }, [])
 
 
@@ -78,7 +100,7 @@ const Header = () => {
                                         isActive ? "border-white border-b " : ""
                                     }
                                 >
-                                    WishList <i className="fa-solid fa-cart-shopping"></i>
+                                    WishList <i className="fa-solid fa-cart-shopping"></i><sup className="text-lg ml-1">{count}</sup>
                                 </NavLink>
                             </li>
                         </ul>

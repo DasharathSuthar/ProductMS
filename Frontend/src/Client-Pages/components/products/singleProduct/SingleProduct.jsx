@@ -1,8 +1,10 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { WishListControllerIns } from '../../../../controller/wishListController/wishList.controller.js'
+import { toast } from 'react-toastify'
+import 'react-toastify/ReactToastify.css'
 
- const SingleProduct = () => {
+const SingleProduct = () => {
     const location = useLocation()
     const { name, img, description, price, id } = location.state || {}
     const navigate = useNavigate()
@@ -23,9 +25,14 @@ import { WishListControllerIns } from '../../../../controller/wishListController
             return;
         }
 
-        await WishListControllerIns.addWishItem({ productId: id }).then(res => {
-            alert(res.message)
-        })
+        try {
+            const res = await WishListControllerIns.addWishItem({ productId: id })
+            toast.success(res.message)
+
+        } catch (error) {
+            const errMessage = error?.response?.data?.message
+            toast.error(errMessage)
+        }
 
     }
 

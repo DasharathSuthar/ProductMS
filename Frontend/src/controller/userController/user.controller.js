@@ -1,12 +1,12 @@
 import axios from "axios"
 
 class UserController {
-    
+
     URL = "http://localhost:5000/api/v1/users/"
 
-    async registerUser(userData){
+    async registerUser(userData) {
         try {
-            const response = await axios.post(`${this.URL}register`,userData,{withCredentials:true})
+            const response = await axios.post(`${this.URL}register`, userData, { withCredentials: true })
             return response.data
         } catch (error) {
             throw error
@@ -15,7 +15,7 @@ class UserController {
 
     async logInUser(userData) {
         try {
-            const response = await axios.post(`${this.URL}login`,userData,{withCredentials:true})
+            const response = await axios.post(`${this.URL}login`, userData, { withCredentials: true })
 
             return response.data
         } catch (error) {
@@ -23,7 +23,7 @@ class UserController {
         }
     }
 
-    async getAllUsers(){
+    async getAllUsers() {
         try {
             const response = await axios.get(this.URL)
             return response.data
@@ -32,9 +32,9 @@ class UserController {
         }
     }
 
-    async logoutUser(){
+    async logoutUser() {
         try {
-            const response = await axios.post(this.URL)
+            const response = await axios.post(`${this.URL}logout`,{}, { withCredentials: true })
             return response.data
         } catch (error) {
             throw error
