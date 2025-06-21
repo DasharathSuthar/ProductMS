@@ -38,7 +38,7 @@ const Footer = () => {
         </div>
 
         {/* Copyright & Social Media */}
-        <div className="py-5 bg-gray-900">
+        <div className="py-5 bg-gradient-to-b from-[#0c0c1d] to-[#111132]">
           <div className="container  ">
             <div className="flex justify-between items-center text-gray-300 max-w-[1000px] m-auto">
               <p>&copy; ProductMS. Designed By Suthar Dasharath. All Rights Reserved.</p>

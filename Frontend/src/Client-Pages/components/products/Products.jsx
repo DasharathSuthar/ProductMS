@@ -19,8 +19,8 @@ const Products = () => {
             <div>
                 <Hero title="Products" description="here you can see what we have at the best rate." />
             </div>
-            <div className='w-full py-20  bg-gradient-to-b from-[#111132] to-[#0c0c1d]'>
-                <div className='max-w-[1000px]  mx-auto h-[100vh]'>
+            <div className='w-full  py-20  bg-gradient-to-b from-[#111132] to-[#0c0c1d]'>
+                <div className='max-w-[1000px]  mx-auto '>
                     <div className='text-white font-semibold border-b mb-6 border-white pb-2 text-2xl capitalize'>
                         <h1>Products List</h1>
                     </div>
