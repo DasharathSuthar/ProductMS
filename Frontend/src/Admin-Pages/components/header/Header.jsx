@@ -5,11 +5,19 @@ import { UserControllerIns } from "../../../controller/userController/user.contr
 
 const Header = () => {
     const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+    const[adminname,setAdminname] = useState('')
     const navigate = useNavigate();
 
     useEffect(() => {
-        const isLoggedIn = localStorage.getItem("adminLoggedIn") === "true";
-        setIsAdminLoggedIn(isLoggedIn);
+       const admin = JSON.parse(localStorage.getItem("adminLoggedIn"));
+        if (admin) {
+            if (admin.accessToken) {
+                setIsAdminLoggedIn(true);
+                setAdminname(admin.username);
+            }
+        } else {
+            setIsLoggedIn(false);
+        }
     }, []);
 
     const handleLogout = async () => {
@@ -44,7 +52,7 @@ const Header = () => {
                                     className="rounded-full border border-white w-full h-full object-cover"
                                 />
                             </div>
-                            <h2 className="text-lg font-semibold uppercase">Admin</h2>
+                            <h2 className="text-lg font-semibold ">{adminname}</h2>
                             <button
                                 onClick={handleLogout}
                                 className="bg-gray-800 transition px-4 py-2 rounded-md font-semibold"

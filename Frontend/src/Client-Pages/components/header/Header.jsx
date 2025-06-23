@@ -14,8 +14,10 @@ const Header = () => {
     const checkLoginStatus = () => {
         const user = JSON.parse(localStorage.getItem("userLoggedIn"));
         if (user) {
-            setIsLoggedIn(true);
-            setUsername(user.username);
+            if (user.accessToken) {
+                setIsLoggedIn(true);
+                setUsername(user.username);
+            }
         } else {
             setIsLoggedIn(false);
         }

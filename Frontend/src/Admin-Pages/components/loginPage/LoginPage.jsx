@@ -20,13 +20,19 @@ const Login = () => {
             const res = await UserControllerIns.logInUser(formData);
             toast.success(res.message);
 
-            const { user } = res.data;
+            const { user, accessToken } = res.data;
 
             if (user.role === "admin") {
-                localStorage.setItem("adminLoggedIn", "true");
+                if (!accessToken) {
+                    toast.error("AccessToken not found")
+                }
+                localStorage.setItem("adminLoggedIn", JSON.stringify({ id: user._id, username: user.username, accessToken }));
                 navigate("/admin/dashboard");
             } else {
-                localStorage.setItem("userLoggedIn", JSON.stringify({ id: user._id, username: user.username }));
+                if (!accessToken) {
+                    toast.error("AccessToken not found")
+                }
+                localStorage.setItem("userLoggedIn", JSON.stringify({ id: user._id, username: user.username, accessToken }));
 
                 const redirectTo = location.state?.redirectTo;
                 const productData = location.state?.productData;
