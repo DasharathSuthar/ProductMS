@@ -36,7 +36,7 @@ const SingleProduct = () => {
 
     return (
         <>
-            <div className='py-10 bg-gradient-to-b from-[#0c0c1d] to-[#111132] min-h-screen'>
+            <div className='py-10 bg-gradient-to-b from-[#0c0c1d] to-[#111132]'>
                 <div className='max-w-[1000px] mx-auto px-4'>
                     <div className='flex flex-col md:flex-row shadow-md shadow-white bg-gradient-to-b from-[#0c0c1d] to-[#111132] rounded-lg gap-6 p-4'>
                         {/* Product Image */}

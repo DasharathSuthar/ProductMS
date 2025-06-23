@@ -49,7 +49,7 @@ const WishList = () => {
     }, []);
 
     return (
-        <div className='w-full py-20 bg-gradient-to-b from-[#0c0c1d] to-[#111132] min-h-screen'>
+        <div className='w-full py-20 bg-gradient-to-b from-[#0c0c1d] to-[#111132] '>
             <div className='max-w-[1000px] mx-auto px-4'>
                 <div className='text-white font-semibold border-b border-white mb-6 pb-2 text-2xl capitalize'>
                     <h1>Your Wishlist Products</h1>
