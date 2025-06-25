@@ -5,6 +5,7 @@ import ProductCard from './productCard/ProductCard'
 
 const Products = () => {
     const [productList, setProductList] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     const getProductsList = async () => {
         try {
@@ -12,6 +13,8 @@ const Products = () => {
             setProductList(productsList.data)
         } catch (error) {
             console.error("Failed to fetch products", error)
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -32,22 +35,27 @@ const Products = () => {
                     </div>
 
                     {/* Product Grid */}
-                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6'>
-                        {productList.length > 0 ? (
-                            productList.map((item) => (
-                                <ProductCard
-                                    key={item._id}
-                                    id={item._id}
-                                    img={item.img}
-                                    name={item.name}
-                                    description={item.des}
-                                    price={item.price}
-                                />
-                            ))
-                        ) : (
-                            <p className="text-white col-span-full">No products found.</p>
-                        )}
-                    </div>
+                    {isLoading ? (
+                        <p className='text-white text-center'>Loading...</p>
+                    ) : (
+                        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6'>
+                            {productList.length > 0 ? (
+                                productList.map((item) => (
+                                    <ProductCard
+                                        key={item._id}
+                                        id={item._id}
+                                        img={item.img}
+                                        name={item.name}
+                                        description={item.des}
+                                        price={item.price}
+                                    />
+                                ))
+                            ) : (
+                                <p className="text-white col-span-full">No products found.</p>
+                            )}
+                        </div>
+                    )}
+
                 </div>
             </div>
         </>
